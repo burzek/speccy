@@ -1,0 +1,145 @@
+                        ; --------------------------------------
+                        ; zasm: assemble "putc.a80"
+                        ; date: 2017-03-05 23:51:29
+                        ; --------------------------------------
+
+
+                        #target tap
+                        
+0000:                   headerflag:     equ 0
+00FF:                   dataflag:       equ 0xff
+00FD:                   tCLEAR      equ     $FD             ; token CLEAR
+00EF:                   tLOAD       equ     $EF             ; token LOAD
+00AF:                   tCODE       equ     $AF             ; token CODE
+00F5:                   tPRINT      equ     $F5             ; token PRINT
+00F9:                   tRANDOMIZE  equ     $F9             ; token RANDOMIZE
+00C0:                   tUSR        equ     $C0             ; token USR
+                        
+4000:                   pixels_start    equ 0x4000      ; ZXSP screen pixels
+5800:                   attr_start      equ 0x5800      ; ZXSP screen attributes
+5B00:                   printer_buffer  equ 0x5B00      ; ZXSP printer buffer
+5DC0:                   code_start      equ 24000
+                        
+5B00:                   #data VARIABLES, printer_buffer, 0x100
+                        
+0000:                   #code PROG_HEADER,0,17,headerflag
+0000: 00                        defb    0                       ; Indicates a Basic program
+0001: 6D6C6F61                  defb    "mloader   "            ; the block name, 10 bytes long
+0005: 64657220          
+0009: 2020              
+000B: 3700                      defw    variables_end-0         ; length of block = length of basic program plus variables
+000D: 0A00                      defw    10                      ; line number for auto-start, 0x8000 if none
+000F: 3700                      defw    program_end-0           ; length of the basic program without variables
+0000:                   #code PROG_DATA,0,*,dataflag
+0000: 000A                      defb    0,10                    ; line number
+0002: 0D                        defb    end10-($+1)             ; line length
+0003: 00                        defb    0                       ; statement number
+0004: FD                        defb    tCLEAR                  ; token CLEAR
+0005: 32333939                  defm    "23999",$0e0000bf5d00   ; number 23999, ascii & internal format
+0009: 390E0000          
+000D: BF5D00            
+0010: 0D                end10:  defb    $0d                     ; line end marker
+0011: 0014                      defb    0,20                    ; line number
+0013: 10                        defb    end20-($+1)             ; line length
+0014: 00                        defb    0                       ; statement number
+0015: EF2222AF                  defb    tLOAD,'"','"',tCODE     ; token LOAD, 2 quotes, token CODE
+0019: 32343030                  defm    "24000",$0e0000c05d00   ; number 24000, ascii & internal format
+001D: 300E0000          
+0021: C05D00            
+0024: 0D                end20:  defb    $0d                     ; line end marker
+0025: 001E                      defb    0,30                    ; line number
+0027: 0E                        defb    end30-($+1)             ; line length
+0028: 00                        defb    0                       ; statement number
+0029: F9C0                      defb    tRANDOMIZE,tUSR         ; token RANDOMIZE, token USR
+002B: 32343030                  defm    "24000",$0e0000c05d00   ; number 24000, ascii & internal format
+002F: 300E0000          
+0033: C05D00            
+0036: 0D                end30:  defb    $0d                     ; line end marker
+0037:                   program_end:
+0037:                   variables_end:
+                        
+0000:                   #code CODE_HEADER,0,17,headerflag
+0000: 03                        defb    3                       ; Indicates binary data
+0001: 6D636F64                  defb    "mcode     "            ; the block name, 10 bytes long
+0005: 65202020          
+0009: 2020              
+000B: 1E00                      defw    code_end-code_start     ; length of data block which follows
+000D: C05D                      defw    code_start              ; default location for the data
+000F: 0000                      defw    0                       ; unused
+5DC0:                   #code CODE_DATA, code_start,*,dataflag
+                        
+                        ; ----------------- ZX program starts here -----------------
+                        
+                        
+                        
+5DC0: CDCD5D   [17]     		call OPENSCR
+5DC3: 3E41     [24]     		ld a, "A"
+5DC5: 260C     [31]     		ld h, 12
+5DC7: 2E0F     [38]     		ld l, 15
+5DC9: CDD35D   [55]     		call PUTC
+5DCC: C9       [65]     		ret
+                        
+                        ;open screen channel, need to be called first
+5DCD: 3E02     [ 7]     OPENSCR:	ld a,$02
+5DCF: CD0116   [24]     			call $1601
+5DD2: C9       [34]     			ret
+                        
+                        ;putchar at position
+                        ;@param reg: a -> char code
+                        ;@param reg: h -> row
+                        ;@param reg: l -> col
+5DD3: 57       [ 4]     PUTC:		ld d,a 			;save char code
+5DD4: 3E16     [11]     			ld a,$16 		;0A21-0A0B (print at)
+5DD6: D7       [22]     			rst $10
+5DD7: 7C       [26]     			ld a,h
+5DD8: D7       [37]     			rst $10
+5DD9: 7D       [41]     			ld a,l
+5DDA: D7       [52]     			rst $10
+5DDB: 7A       [56]     			ld a,d
+5DDC: D7       [67]     			rst $10
+5DDD: C9       [77]     			ret
+                        
+                        
+                        ; ------------------ZX program ends here -------------------
+5DDE:                   code_end:
+
+
+; +++ segments +++
+
+#CODE PROG_HEADER: start=0     len=17    flag=0
+#CODE PROG_DATA:   start=0     len=55    flag=255
+#CODE CODE_HEADER: start=0     len=17    flag=0
+#CODE CODE_DATA:   start=24000 len=30    flag=255
+#DATA VARIABLES:   start=23296 len=256  
+
+; +++ global symbols +++
+
+CODE_DATA      = $5DC0 =  24000  CODE_DATA   putc.a80:52 (unused)
+CODE_HEADER    = $0000 =      0  CODE_HEADER putc.a80:46 (unused)
+OPENSCR        = $5DCD =  24013  CODE_DATA   putc.a80:67
+PROG_DATA      = $0000 =      0  PROG_DATA   putc.a80:24 (unused)
+PROG_HEADER    = $0000 =      0  PROG_HEADER putc.a80:18 (unused)
+PUTC           = $5DD3 =  24019  CODE_DATA   putc.a80:75
+VARIABLES      = $5B00 =  23296  VARIABLES   putc.a80:16 (unused)
+attr_start     = $5800 =  22528              putc.a80:13 (unused)
+code_end       = $5DDE =  24030  CODE_DATA   putc.a80:88
+code_start     = $5DC0 =  24000              putc.a80:15
+dataflag       = $00FF =    255              putc.a80:4
+end10          = $0010 =     16  PROG_DATA   putc.a80:31
+end20          = $0024 =     36  PROG_DATA   putc.a80:37
+end30          = $0036 =     54  PROG_DATA   putc.a80:43
+headerflag     = $0000 =      0              putc.a80:3
+pixels_start   = $4000 =  16384              putc.a80:12 (unused)
+printer_buffer = $5B00 =  23296              putc.a80:14
+program_end    = $0037 =     55  PROG_DATA   putc.a80:44
+tCLEAR         = $00FD =    253              putc.a80:5
+tCODE          = $00AF =    175              putc.a80:7
+tLOAD          = $00EF =    239              putc.a80:6
+tPRINT         = $00F5 =    245              putc.a80:8 (unused)
+tRANDOMIZE     = $00F9 =    249              putc.a80:9
+tUSR           = $00C0 =    192              putc.a80:10
+variables_end  = $0037 =     55  PROG_DATA   putc.a80:45
+
+
+total time: 0.0035 sec.
+no errors
