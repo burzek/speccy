@@ -1,0 +1,397 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"def",
+				"defw"
+			],
+			[
+				"AT",
+				"ATTR_T"
+			],
+			[
+				"de",
+				"device"
+			],
+			[
+				"spe",
+				"scope"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "putc.a80",
+			"settings":
+			{
+				"buffer_size": 3932,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "putc.a80.tap",
+			"settings":
+			{
+				"buffer_size": 400,
+				"encoding": "Hexadecimal",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "putc.lst",
+			"settings":
+			{
+				"buffer_size": 9441,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/z80asm/z80asm.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/z80asm/z80asm.sublime-build",
+					""
+				],
+				[
+					"Packages/z80asm/z80asm.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/z80asm/z80asm.sublime-build",
+					"Build and Run"
+				]
+			],
+			[
+				"Packages/z80asm/z80asm.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 57.0,
+		"last_filter": "Z",
+		"selected_items":
+		[
+			[
+				"Z",
+				"Set Syntax: Z80 Asm"
+			],
+			[
+				"z80",
+				"Set Syntax: Z80 Asm"
+			],
+			[
+				"Snippet: ",
+				"Snippet: Z80 Asm: wait enter key"
+			]
+		],
+		"width": 377.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/boris/Work/speccy/programs"
+	],
+	"file_history":
+	[
+		"/home/boris/Work/speccy/programs/putc.a80.tap",
+		"/home/boris/Work/speccy/programs/putc.lst",
+		"/home/boris/Work/speccy/programs/putc.a80",
+		"/home/boris/Work/speccy/programs/routines.sublime-project",
+		"/home/boris/Work/speccy/programs/routines.sublime-workspace",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/z80asm.sublime-settings",
+		"/home/boris/.config/sublime-text-2/Packages/User/Preferences.sublime-settings",
+		"/home/boris/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
+		"/home/boris/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/boris/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap",
+		"/home/boris/.config/sublime-text-2/Packages/User/Distraction Free.sublime-settings",
+		"/home/boris/.config/sublime-text-2/Packages/User/JSON.sublime-settings",
+		"/home/boris/Work/speccy/programs/test.a80",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/build.sh",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/buildrun.sh",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/z80asm.tmTheme",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/README.md",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/run.sh",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/z80asm.tmPreferences",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/z80asm.tmLanguage",
+		"/home/boris/Downloads/test.asm",
+		"/home/boris/Downloads/X.z80",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/Default.sublime-keymap",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/Symbol List.tmPreferences",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/z80asm.py",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/z80asm.sublime-build",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/helps/Z80 Opcodes",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/helps/Basic Symbols",
+		"/home/boris/Downloads/xy.asm",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/snippets/init.sublime-snippet",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/snippets/bank.sublime-snippet",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/snippets/border.sublime-snippet",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/snippets/loop_djnz.sublime-snippet",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/build.bat",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/run.bat",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/build",
+		"/home/boris/.config/sublime-text-2/Packages/z80asm/z80asm.about",
+		"/home/boris/Downloads/LoyaltyLogs%2Feps_20170224-09h.0.log",
+		"/home/boris/Downloads/eps_20170228-10h.log",
+		"/home/boris/Desktop/CARD_TABLE.xml",
+		"/home/boris/Desktop/SELECTION_TABLE.xml",
+		"/home/boris/Downloads/eps.log",
+		"/home/boris/xxx",
+		"/home/boris/Downloads/00update/1.1.4.3.HF4-CHEVRONUS_to_1.1.4.4-CHEVRONUS/update-creator/update.sql",
+		"/home/boris/Downloads/E-Kniha-Odom_Mel_Hellgate_2_Goetia.pdf(obchodnik.jimdo.com).txt",
+		"/home/boris/.cache/.fr-N2zcVp/Hellgate_1___Exodus.txt",
+		"/run/user/1000/gvfs/google-drive:host=gmail.com,user=boris.brinza/0B93oCJCUEZMNZ3M5MUZSRVB5OUU",
+		"/home/boris/Downloads/00update/1.1.4.3.HF4-CHEVRONUS_to_1.1.4.4-CHEVRONUS/update.sql",
+		"/home/boris/Downloads/update.sql",
+		"/run/user/1000/gvfs/smb-share:server=merkur,share=public/Other/jenkins-graph-viewer/jenkins-test-viewer.html",
+		"/home/boris/Downloads/161219092000_0999.eptbl"
+	],
+	"find":
+	{
+		"height": 32.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"ATTR",
+			"theme",
+			"z80",
+			"bracket",
+			"$",
+			"Please call 1-800-528-2121",
+			"was 7",
+			"Null pointer",
+			"NullPointerE",
+			")\n",
+			"name='chevron_automated_unconfirmed_transaction_log'"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "putc.a80",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3932,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2867,
+								2867
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/z80asm/z80asm.tmLanguage",
+							"tab_size": 8,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 414.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "putc.a80.tap",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 400,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "putc.lst",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9441,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 8,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 870.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 274.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "routines.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 192.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -2,12 +2,12 @@
 
 headerflag:     equ 0
 dataflag:       equ 0xff
-tCLEAR      equ     $FD             ; token CLEAR
-tLOAD       equ     $EF             ; token LOAD
-tCODE       equ     $AF             ; token CODE
-tPRINT      equ     $F5             ; token PRINT
-tRANDOMIZE  equ     $F9             ; token RANDOMIZE
-tUSR        equ     $C0             ; token USR
+tCLEAR          equ $FD             ; token CLEAR
+tLOAD           equ $EF             ; token LOAD
+tCODE           equ $AF             ; token CODE
+tPRINT          equ $F5             ; token PRINT
+tRANDOMIZE      equ $F9             ; token RANDOMIZE
+tUSR            equ $C0             ; token USR
 
 pixels_start    equ 0x4000      ; ZXSP screen pixels
 attr_start      equ 0x5800      ; ZXSP screen attributes
@@ -50,38 +50,100 @@ variables_end:
         defw    code_end-code_start     ; length of data block which follows
         defw    code_start              ; default location for the data
         defw    0                       ; unused
-#code CODE_DATA, code_start,*,dataflag
+#code CODE_DATA,code_start,*,dataflag
+
 
 ; ----------------- ZX program starts here -----------------
 
+        call CLS
+
+        ld hl,16384
+        ld (PRINTPOS),hl
+        ld a,32
+MAIN:   push af
+        call PRINTC
+        pop af        
+        inc a
+        cp 128
+        jr nz, MAIN
+        ret
+
+PRINTC: push af                 ;get address of char in charmap
+        sub 32                  
+        ld h,0
+        ld l,a
+        add hl,hl
+        add hl,hl
+        add hl,hl
+        ld de,CMAP
+        add hl,de               ;now, hl contains start of character def
+        ld b,8                  ;each char has 8 lines
+        ld de,(PRINTPOS)        ;printpos into de
+        push de
+PRC1:   ld a,(hl)               ;print character
+        rrca                    ;line 1 right
+        ld (de),a        
+        inc d
+        inc hl
+        
+        ld a,(hl)               ;line 2 right
+        rrca                   
+        ld (de),a        
+        inc d
+        inc hl
+
+        ld a,(hl)               ;line 3 right
+        rrca                   
+        ld (de),a        
+        inc d
+        inc hl
+
+        ld a,(hl)               ;line 4 normal
+        ld (de),a        
+        inc d
+        inc hl
+
+        ld a,(hl)               ;line 5 normal
+        ld (de),a        
+        inc d
+        inc hl
+        
+        ld a,(hl)               ;line 6 left
+        rlca
+        ld (de),a        
+        inc d
+        inc hl
+
+        ld a,(hl)               ;line 7 left
+        rlca
+        ld (de),a        
+        inc d
+        inc hl
+
+        ld a,(hl)               ;line 8 left
+        rlca
+        ld (de),a        
+        inc d
+        inc hl
+
+        pop de                  ;set new printpos
+        inc e
+        jr nz, S_POS
+        ld a,d
+        add a,8
+        ld d,a
+        cp 88
+        jr c, S_POS
+        ld d,64
+S_POS:  ld (PRINTPOS),de
+        pop af
+        ret
+
+CMAP:    equ 15616
+PRINTPOS: defw 0 ;sem je ukládána tisková pozic
 
 
-		call OPENSCR
-		ld a, "A"
-		ld h, 12
-		ld l, 15
-		call PUTC
-		ret
-
-;open screen channel, need to be called first
-OPENSCR:	ld a,$02
-			call $1601
-			ret
-
-;putchar at position
-;@param reg: a -> char code
-;@param reg: h -> row
-;@param reg: l -> col
-PUTC:		ld d,a 			;save char code
-			ld a,$16 		;0A21-0A0B (print at)
-			rst $10
-			ld a,h
-			rst $10
-			ld a,l
-			rst $10
-			ld a,d
-			rst $10
-			ret
+#include "subroutines/libtext.a80"
 
 
 ; ------------------ZX program ends here -------------------

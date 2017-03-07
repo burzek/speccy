@@ -1,0 +1,44 @@
+;--------------------- character routines ---------------------------
+
+;clear screen
+CLS:            call $0d6b
+                ret
+
+;open screen channel, need to be called first
+OPEN_S:	        ld a,$02
+		call $1601
+		ret
+
+
+;set attribute of text (ink + border)
+;@param reg: b -> paper
+;@param reg: c -> ink
+S_ATTR:         ld a,b
+                sla a
+                sla a
+                sla a
+                add c
+                ld ($5c8f), a
+                ret
+
+
+;set cursor to position
+;@param reg: b -> row
+;@param reg: c -> col
+S_AT:           ld a,$16
+                rst $10
+                ld a,b
+                rst $10
+                ld a,c
+                rst $10
+                ret
+
+;putchar at position
+;@param reg: a -> char code
+;@param reg: b -> row
+;@param reg: c -> col
+PUTC_AT:	ld d,a 			;save char code
+		call S_AT
+		ld a,d
+		rst $10
+                ret
