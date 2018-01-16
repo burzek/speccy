@@ -1,0 +1,28 @@
+.org 32768
+
+start:
+
+copyfont:	ld hl, ROM_FONT
+		inc h
+		ld bc, 96 * 8;	96 chars * 8 bytes
+		ld de, CUST_FONT
+loop:		ld a, (hl)
+		rlca
+		or (hl)
+		ld (de), a
+		inc hl
+		inc de
+		dec bc
+		ld a, b
+		or c
+		jr nz, loop
+
+		ld hl, CUST_FONT	
+		dec h
+		ld (CHARS), hl
+		ret
+
+
+ROM_FONT:	equ 15360	
+CUST_FONT:	equ 50000
+CHARS:		equ 23606

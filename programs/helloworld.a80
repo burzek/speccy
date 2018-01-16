@@ -1,0 +1,16 @@
+.org 32768
+
+start:
+	ld a, 2
+	call $1601	;open "s" channel
+
+	ld hl, line
+printc:	ld a, (hl)
+	cp '$'
+	jp z, finish
+	rst $10
+	inc hl
+	jp printc
+finish:	ret	
+
+line: defb "Hello, World$"

@@ -42,3 +42,29 @@ PUTC_AT:	ld d,a 			;save char code
 		ld a,d
 		rst $10
                 ret
+
+;print number
+;@param reg bc -> value
+PRINT_NUM:      push hl
+                ld hl, bc
+                ld bc, 10000
+                call PRINT_DIGIT
+                ld bc, 1000
+                call PRINT_DIGIT
+                ld bc, 100
+                call PRINT_DIGIT
+                ld bc, 10
+                call PRINT_DIGIT
+                ld bc, 1
+                call PRINT_DIGIT
+                pop hl
+                ret
+PRINT_DIGIT:    push hl
+                ld a, 0
+                sbc hl, bc
+                jr c, DONE
+                inc a
+                jr PRINT_DIGIT
+DONE:           rst $10
+                pop hl
+                ret                

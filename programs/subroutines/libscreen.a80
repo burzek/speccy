@@ -1,0 +1,64 @@
+; --------- screen rouitines -------------
+;return address of pixel
+;@param reg: b -> position x
+;@param reg: c -> position y
+;@return reg: hl -> screen address
+;0 1 0 Y7 Y6 Y2 Y1 Y0    Y5 Y4 Y3 X7 X6 X5 X4 X3
+PIXADDR: 	ld a,c
+		and a,%00000111
+		or a,%01000000
+		ld h,a
+		ld a,c
+		and a,%11000000
+		srl a
+		srl a
+		srl a
+		or h		
+		ld h,a		;h is done	
+		ld a,c
+		and a,%00111000
+		sla a
+		sla a
+		ld l,a
+		ld a,b
+		srl a
+		srl a
+		srl a
+		or l
+		ld l,a		;l is done
+		ret
+
+;put pixel at position x,y
+;@param reg b -> position x
+;@param reg c -> position y
+PUTPIXEL: 	push bc
+		call PIXADDR
+		ld c,$80
+		ld a,b
+		and a,%00000111
+SHLOOP:		cp 0
+		jr z,SHDONE
+		srl c
+		dec a
+		jr SHLOOP
+SHDONE:		ld a,(hl)
+		or c
+		ld (hl),a
+		pop bc
+		ret		
+
+
+;put pixel at position x,y with color
+;@param reg b -> position x
+;@param reg c -> position y
+;@param reg a -> color
+PUTPIXELC: 	ex af,af'
+		call PUTPIXEL
+		srl b
+		srl b
+		srl b
+		
+		;$5800
+		;y / 8 * 32 + x / 8
+		ex af,af'
+		ret		

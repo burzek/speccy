@@ -1,0 +1,57 @@
+.org 32768
+
+start:	ld a, 2
+	call $1601
+
+	call num_print
+	call num_print_stack
+	call setborder
+	ret
+
+num_print:	
+	ld bc, 1		;
+	call PRINT_LINE_NUM
+	ld a, 13
+	rst $10
+	ld bc, 5170
+	call PRINT_LINE_NUM
+	ld a, 13
+	rst $10
+	ret
+
+num_print_stack:
+	ld bc, 1
+	call STACK_BC
+	call PRINT_FP
+	ld a, 13
+	rst $10
+	ld bc, 5170
+	call STACK_BC
+	call PRINT_FP
+	ld a, 13
+	rst $10
+	ret
+
+setborder:
+	ld a, 2
+	call SET_BORDER
+	call sleep
+	ld a, 3
+	rlca
+	rlca
+	rlca
+	ld (BORDER_MEM), a
+	ret
+
+sleep: 	ld b, 15
+sleep0:	halt
+	dec b
+	jr nz, sleep0
+	ret
+
+PRINT_LINE_NUM:	equ $1a1b
+STACK_BC: 	equ $2d2b
+PRINT_FP: 	equ $2de3	
+
+SET_BORDER:	equ $229b
+BORDER_MEM:	equ $5c48	

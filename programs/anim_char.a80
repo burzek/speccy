@@ -1,0 +1,36 @@
+.org 32768
+
+start:
+	ld a, 2
+	call $1601	;open "s" channel
+	ld a, 21
+	ld (ypos), a
+loop:	call setpos
+	ld a, '#'
+	rst $10
+	call delay
+	call setpos
+	ld a, ' '
+	rst $10
+	ld hl, ypos
+	dec (hl)
+	ld a, (ypos)
+	cp 255
+	jr nz, loop
+	ret
+
+delay:	ld b, 10
+dloop:	halt
+	djnz dloop	
+	ret
+
+setpos:	ld a, 22
+	rst $10
+	ld a, (ypos)
+	rst $10
+	ld a, (xpos)
+	rst $10
+	ret
+
+xpos: 	defb 15
+ypos:	defb 0

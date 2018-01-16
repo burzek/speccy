@@ -1,0 +1,92 @@
+.org 32768
+
+start:		xor a, a	
+		call $229b		;black border
+		ld a, 71		;black paper, white ink, bright
+		ld ($5c8d), a	
+		ld hl, PLAYER_UDG
+		ld ($5c7b), hl	 	;create UDG player
+		call $0daf		;open s-channel and clear screen
+		
+main:		ld hl,$5c08         	; read kbd
+	       	ld (hl),0           
+kbd_loop:   	ld a, (hl)
+		cp 0                
+	       	jr z,kbd_loop   
+	       	ld (LAST_KEY), a           
+	       	cp 32
+	       	jr z, quit    
+	       	
+		call player_pos
+		call clear_player
+		
+		ld a, (LAST_KEY)	;restore last key read to a
+	       	cp 'q'
+	       	call z, movu
+	       	cp 'a'
+	       	call z, movd
+	       	cp 'o'
+	       	call z, movl
+	       	cp 'p'
+	       	call z, movr
+
+	       	call player_pos
+		call show_player
+
+		jr main
+
+quit:		ret
+
+movd:		ld hl, PLROW
+		ld a, (hl)
+		cp 21
+		ret z
+		inc (hl)
+		ret
+
+movu:		ld hl, PLROW
+		ld a, (hl)
+		cp 0
+		ret z
+		dec (hl)
+		ret
+
+
+movr:		ld hl, PLCOL
+		ld a, (hl)
+		cp 31
+		ret z
+		inc (hl)
+		ret
+		
+movl:		ld hl, PLCOL
+		ld a, (hl)
+		cp 0
+		ret z
+		dec (hl)
+		ret
+
+
+show_player:	ld a, 144	; UDG A
+		rst $10
+		ret
+
+
+clear_player:	ld a, 32	;space
+		rst $10
+		ret
+
+player_pos:	ld a, 22
+		rst $10
+		ld a, (PLROW)
+		rst $10
+		ld a, (PLCOL)
+		rst $10
+		ret
+		
+
+
+PLROW:		defb 10	
+PLCOL:		defb 15
+LAST_KEY:	defb 0
+PLAYER_UDG:	defb 16,16,56,56,124,124,254,254 

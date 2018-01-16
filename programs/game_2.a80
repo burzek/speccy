@@ -1,0 +1,125 @@
+.org 32768
+
+start:		xor a, a	
+		call $229b		;black border
+		ld a, 71		;black paper, white ink, bright
+		ld ($5c8d), a	
+		ld hl, udg
+		ld ($5c7b), hl	 	;set UDG
+		call $0daf		;open s-channel and clear screen
+
+	
+		call gen_mushrooms	;generate mushrooms
+		
+main:		ld hl,$5c08         	;read kbd
+	       	ld (hl),0           
+kbd_loop:   	ld a, (hl)
+		cp 0                
+	       	jr z,kbd_loop   
+	       	ld (last_key), a           
+	       	cp 32
+	       	jr z, quit    
+	       	
+		call player_pos
+		call clear_player
+		
+		ld a, (last_key)	;restore last key read to a
+	       	cp 'q'
+	       	call z, movu
+	       	cp 'a'
+	       	call z, movd
+	       	cp 'o'
+	       	call z, movl
+	       	cp 'p'
+	       	call z, movr
+
+	       	call player_pos
+		call show_player
+
+		jr main
+quit:		ret
+
+movd:		ld hl, plrow
+		ld a, (hl)
+		cp 21
+		ret z
+		inc (hl)
+		ret
+
+movu:		ld hl, plrow
+		ld a, (hl)
+		cp 0
+		ret z
+		dec (hl)
+		ret
+
+
+movr:		ld hl, plcol
+		ld a, (hl)
+		cp 31
+		ret z
+		inc (hl)
+		ret
+		
+movl:		ld hl, plcol
+		ld a, (hl)
+		cp 0
+		ret z
+		dec (hl)
+		ret
+
+
+show_player:	ld a, 69		;cyan ink, black paper, bright
+		ld ($5c8f), a
+		ld a, 144		;UDG A
+		rst $10
+		ret
+
+
+clear_player:	ld a,71             	;white ink, black paper, bright
+       		ld ($5c8f),a 
+		ld a, 32		;space
+		rst $10
+		ret
+
+player_pos:	ld a, 22
+		rst $10
+		ld a, (plrow)
+		rst $10
+		ld a, (plcol)
+		rst $10
+		ret
+		
+gen_mushrooms:	ld a, 68		;green ink, black paper, bright
+		ld ($5c8f), a
+		ld b, 25		;mushrooms count
+gen_mush0:	ld a, 22
+		rst $10
+		call get_random
+		and 21
+		rst $10
+		call get_random
+		and 31
+		rst $10
+		ld a, 145	; UDG B
+		rst $10
+		djnz gen_mush0
+		ret
+
+get_random:	ld hl, (rand_seed)	;return random number in reg a
+		ld a, h
+		and 31
+		ld h, a
+		ld a, (hl)
+		inc hl 
+		ld (rand_seed), hl
+		ret
+
+
+rand_seed:	defw 0
+plrow:		defb 10	
+plcol:		defb 15
+last_key:	defb 0
+udg:
+player_udg:	defb 16,16,56,56,124,124,254,254 
+mush_udg:	defb 24,126,255,255,60,60,60,60

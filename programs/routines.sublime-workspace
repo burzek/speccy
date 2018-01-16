@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"PRINT",
+				"PRINT_NUM"
+			],
+			[
+				"PU",
+				"PUTPIXEL"
+			],
+			[
+				"P",
+				"PRC1"
+			],
+			[
 				"def",
 				"defw"
 			],
@@ -24,28 +36,37 @@
 	"buffers":
 	[
 		{
-			"file": "putc.a80",
+			"file": "subroutines/libtext.a80",
 			"settings":
 			{
-				"buffer_size": 3932,
+				"buffer_size": 1553,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "putc.a80.tap",
+			"file": "num_print.a80",
 			"settings":
 			{
-				"buffer_size": 400,
-				"encoding": "Hexadecimal",
+				"buffer_size": 2855,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "putc.lst",
+			"file": "/home/boris/Downloads/eps_20170313-18h.0.log",
 			"settings":
 			{
-				"buffer_size": 9441,
+				"buffer_size": 5019535,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "char_attr.a80",
+			"settings":
+			{
+				"buffer_size": 3133,
 				"line_ending": "Unix"
 			}
 		}
@@ -77,10 +98,22 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 57.0,
-		"last_filter": "Z",
+		"height": 292.0,
+		"last_filter": "inde",
 		"selected_items":
 		[
+			[
+				"inde",
+				"Indent XML"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"xml",
+				"Set Syntax: XML"
+			],
 			[
 				"Z",
 				"Set Syntax: Z80 Asm"
@@ -94,7 +127,7 @@
 				"Snippet: Z80 Asm: wait enter key"
 			]
 		],
-		"width": 377.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -114,12 +147,26 @@
 	},
 	"expanded_folders":
 	[
-		"/home/boris/Work/speccy/programs"
+		"/home/boris/Work/speccy/programs",
+		"/home/boris/Work/speccy/programs/subroutines"
 	],
 	"file_history":
 	[
-		"/home/boris/Work/speccy/programs/putc.a80.tap",
+		"/home/boris/Documents/gabo.txt",
+		"/home/boris/Work/speccy/programs/subroutines/libscreen.lst",
+		"/home/boris/Downloads/eps.log",
+		"/home/boris/Work/speccy/programs/pixel_1.a80",
+		"/home/boris/Work/speccy/programs/char_attr.a80",
+		"/home/boris/Work/speccy/programs/subroutines/libscreen.a80",
+		"/home/boris/Work/speccy/programs/pixel_1.lst",
+		"/home/boris/.config/sublime-text-3/Packages/z80asm/helps/Z80 Opcodes",
+		"/home/boris/Work/speccy/programs/subroutines/libtext.a80",
+		"/home/boris/Work/speccy/programs/char_italics.a80",
+		"/home/boris/Work/speccy/programs/char_1.a80",
+		"/home/boris/Work/speccy/programs/char_2.lst",
+		"/home/boris/Work/speccy/programs/char_2.a80",
 		"/home/boris/Work/speccy/programs/putc.lst",
+		"/home/boris/Work/speccy/programs/putc.a80.tap",
 		"/home/boris/Work/speccy/programs/putc.a80",
 		"/home/boris/Work/speccy/programs/routines.sublime-project",
 		"/home/boris/Work/speccy/programs/routines.sublime-workspace",
@@ -159,7 +206,6 @@
 		"/home/boris/Downloads/eps_20170228-10h.log",
 		"/home/boris/Desktop/CARD_TABLE.xml",
 		"/home/boris/Desktop/SELECTION_TABLE.xml",
-		"/home/boris/Downloads/eps.log",
 		"/home/boris/xxx",
 		"/home/boris/Downloads/00update/1.1.4.3.HF4-CHEVRONUS_to_1.1.4.4-CHEVRONUS/update-creator/update.sql",
 		"/home/boris/Downloads/E-Kniha-Odom_Mel_Hellgate_2_Goetia.pdf(obchodnik.jimdo.com).txt",
@@ -172,7 +218,7 @@
 	],
 	"find":
 	{
-		"height": 32.0
+		"height": 22.0
 	},
 	"find_in_files":
 	{
@@ -186,6 +232,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"ODOMETER",
+			"ODOMETER 123",
+			"OD 123",
+			" 123",
 			"ATTR",
 			"theme",
 			"z80",
@@ -214,24 +264,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "putc.a80",
+					"file": "subroutines/libtext.a80",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3932,
+						"buffer_size": 1553,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2867,
-								2867
+								1382,
+								1382
 							]
 						],
 						"settings":
@@ -241,19 +291,47 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 414.0,
+						"translation.y": 378.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "putc.a80.tap",
+					"file": "num_print.a80",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 400,
+						"buffer_size": 2855,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2741,
+								2741
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/z80asm/z80asm.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 84.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/boris/Downloads/eps_20170313-18h.0.log",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5019535,
 						"regions":
 						{
 						},
@@ -272,37 +350,37 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "putc.lst",
+					"buffer": 3,
+					"file": "char_attr.a80",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9441,
+						"buffer_size": 3133,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3059,
+								3059
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"syntax": "Packages/z80asm/z80asm.tmLanguage",
 							"tab_size": 8,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 870.0,
+						"translation.y": 378.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -310,11 +388,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 22.0
 	},
 	"input":
 	{
-		"height": 0.0
+		"height": 35.0
 	},
 	"layout":
 	{
@@ -351,7 +429,7 @@
 	"project": "routines.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 40.0
 	},
 	"save_all_on_build": true,
 	"select_file":

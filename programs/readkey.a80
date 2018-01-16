@@ -1,0 +1,17 @@
+.org 32000
+
+start:		ld a, 2
+		call $1601		;open s-channel
+loop:		xor a, a
+		ld (LAST_KEY), a	;clear LAST_KEY
+waitkey:	ld a, (LAST_KEY)
+		cp 0			
+		jr z, waitkey		;no key -> try again
+		cp 'q'			
+		jr z, finish		;q key was pressed -> finish
+		rst $10			;else print key
+		jr loop
+finish:		ret
+
+
+LAST_KEY:	equ $5c08

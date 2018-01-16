@@ -1,0 +1,47 @@
+.org 32768
+start:	ld a, 2
+	call $1601
+
+	ld a, 22	;char at
+	rst $10
+	ld a, 16
+	rst $10
+	ld a, 5
+	rst $10
+
+	ld hl, attrt	
+	ld a, ink
+	ld (hl), a
+	ld a, "#"
+	rst $10
+	call sleep
+	
+	ld a, paper	
+	ld (hl), a
+	ld a, "#"
+	rst $10
+	call sleep
+
+	ld a, brightness	
+	ld (hl), a
+	ld a, "#"
+	rst $10
+	call sleep
+
+	ld a, blink	
+	ld (hl), a
+	ld a, "#"
+	rst $10
+	call sleep
+	ret
+
+sleep:	ld b, 15
+sleep0:	halt
+	djnz sleep0
+	ret	
+
+attrt: 	equ $5c8f	
+ink:	equ 5
+paper:	equ 8 + 5
+brightness: equ 64 + 8 + 5
+blink:	equ 128 + 64 + 8 + 5	
