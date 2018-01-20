@@ -1,0 +1,71 @@
+org 40000
+
+
+start:
+	call OPEN_SCREEN
+
+	;test print_text at position 16, 10
+	ld d, 16
+	ld e, 10
+	call SET_CURSOR_AT
+	ld hl, TEXT 
+	call PRINT_TEXT
+
+
+	;test color
+	ld d, 16
+	ld e, 11
+	call SET_CURSOR_AT
+	ld b, INK_BLUE | PAPER_GREEN | BRIGHT
+	call SET_TEXT_ATTR
+	ld hl, TEXT 
+	call PRINT_TEXT
+	ld b, INK_BLACK | PAPER_WHITE
+	call SET_TEXT_ATTR
+	
+
+	;test putc
+	ld d, 16
+	ld e, 12
+	ld a, '1'
+	call PUTC_AT
+	ld d, 17
+	ld e, 12
+	ld a, '2'
+	call PUTC_AT
+	ld d, 18
+	ld e, 12
+	ld a, '3'
+	call PUTC_AT
+	
+	;test number
+	ld d, 16
+	ld e, 13
+	call SET_CURSOR_AT
+	ld bc, 1
+	call PRINT_NUM
+	ld d, 16
+	ld e, 14
+	call SET_CURSOR_AT
+	ld bc, 10
+	call PRINT_NUM
+	ld d, 16
+	ld e, 15
+	call SET_CURSOR_AT
+	ld bc, 100
+	call PRINT_NUM
+	ld d, 16
+	ld e, 16
+	call SET_CURSOR_AT
+	ld bc, 1000
+	call PRINT_NUM
+
+
+TEXT:	defm "HELLO, World", 0
+
+include "libtext.a80"
+
+
+
+end start
+

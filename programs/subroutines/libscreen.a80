@@ -3,30 +3,41 @@
 ;@param reg: b -> position x
 ;@param reg: c -> position y
 ;@return reg: hl -> screen address
+;@return ret: a -> pixel position in byte
 ;0 1 0 Y7 Y6 Y2 Y1 Y0    Y5 Y4 Y3 X7 X6 X5 X4 X3
-PIXADDR: 	ld a,c
-		and a,%00000111
-		or a,%01000000
-		ld h,a
-		ld a,c
-		and a,%11000000
-		srl a
-		srl a
-		srl a
-		or h		
-		ld h,a		;h is done	
-		ld a,c
-		and a,%00111000
-		sla a
-		sla a
-		ld l,a
-		ld a,b
-		srl a
-		srl a
-		srl a
+GET_PIXEL_ADDRESS:
+	 	ld a, (ypos)
+		ld l, a
+		and %00000111
+		ld h, a
+		
+		ld a, l
+		rra
+		rra
+		rra
+		and %00011000
+		or h
+		or %01000000
+		ld h, a
+
+		ld a, l
+		rla
+		rla
+		and %11100000
+		ld l, a
+		ld a, (xpos)
+		rra
+		rra
+		rra
+		and %00011111
 		or l
-		ld l,a		;l is done
+		ld l, a
+		ld a, (xpos)
+		or %00000111
 		ret
+
+
+
 
 ;put pixel at position x,y
 ;@param reg b -> position x

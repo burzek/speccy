@@ -1,52 +1,81 @@
 ;--------------------- character routines ---------------------------
 
+INK_BLACK       equ %00000000
+INK_BLUE        equ %00000001
+INK_RED         equ %00000010
+INK_MAGENTA     equ %00000011
+INK_GREEN       equ %00000100
+INK_CYAN        equ %00000101
+INK_YELLOW      equ %00000110
+INK_WHITE       equ %00000111
+PAPER_BLACK     equ %00000000
+PAPER_BLUE      equ %00001000
+PAPER_RED       equ %00010000
+PAPER_MAGENTA   equ %00011000
+PAPER_GREEN     equ %00100000
+PAPER_CYAN      equ %00101000
+PAPER_YELLOW    equ %00110000
+PAPER_WHITE     equ %00111000
+BRIGHT          equ %01000000
+FLASH           equ %10000000
+
 ;clear screen
-CLS:            call $0d6b
+CLS:            call $0daf
                 ret
 
 ;open screen channel, need to be called first
-OPEN_S:	        ld a,$02
+OPEN_SCREEN:
+                ld a, $02
 		call $1601
+                call CLS
 		ret
 
 
 ;set attribute of text (ink + border)
-;@param reg: b -> paper
-;@param reg: c -> ink
-S_ATTR:         ld a,b
-                sla a
-                sla a
-                sla a
-                add c
+;@param reg: b -> attribute value
+SET_TEXT_ATTR:       
+                ld a,b
                 ld ($5c8f), a
                 ret
 
 
 ;set cursor to position
-;@param reg: b -> row
-;@param reg: c -> col
-S_AT:           ld a,$16
+;@param reg: d -> row
+;@param reg: e -> col
+SET_CURSOR_AT:
+                ld a,$16
                 rst $10
-                ld a,b
+                ld a,e
                 rst $10
-                ld a,c
+                ld a,d
                 rst $10
                 ret
 
 ;putchar at position
 ;@param reg: a -> char code
-;@param reg: b -> row
-;@param reg: c -> col
-PUTC_AT:	ld d,a 			;save char code
-		call S_AT
-		ld a,d
+;@param reg: d -> row
+;@param reg: e -> col
+PUTC_AT:	ex af, af' 			;save char code
+		call SET_CURSOR_AT
+		ex af, af'
 		rst $10
                 ret
 
-;print number
+;print text at current position
+;@param reg hl -> pointer to zero terminated string
+PRINT_TEXT:     
+                ld a, (hl)
+                cp 0
+                jr z, PRINT_TEXT_END
+                rst $10
+                inc hl
+                jr PRINT_TEXT
+PRINT_TEXT_END: ret
+
+;print number at current position
 ;@param reg bc -> value
-PRINT_NUM:      push hl
-                ld hl, bc
+PRINT_NUM:      ld h, b
+                ld l, c
                 ld bc, 10000
                 call PRINT_DIGIT
                 ld bc, 1000
@@ -57,14 +86,13 @@ PRINT_NUM:      push hl
                 call PRINT_DIGIT
                 ld bc, 1
                 call PRINT_DIGIT
-                pop hl
                 ret
-PRINT_DIGIT:    push hl
-                ld a, 0
+PRINT_DIGIT:    ld a, 0
                 sbc hl, bc
                 jr c, DONE
                 inc a
                 jr PRINT_DIGIT
-DONE:           rst $10
-                pop hl
+DONE:           add hl, bc
+                add a, '0'
+                rst $10
                 ret                

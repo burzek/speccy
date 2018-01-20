@@ -1,0 +1,35 @@
+ld a, 02
+call #1601		-> open "s" chanel
+
+rst #10			-> print char from accumulator
+
+
+rst #10 codes
+8 - cursor left (posune tiskovou pozici doleva)
+9 - cursor right (posune tiskovou pozici doprava)
+10 - cursor down (posune tiskovou pozici dolů)
+11 - cursor up (posune tiskovou pozici nahoru)
+
+16 - ink (ovládání barvy inkoustu - pošlete kód 16 a potom číslo 0-7)
+17 - paper (ovládání barvy papíru - pošlete kód 17 a potom číslo 0-7)
+18 - flash (ovládání blikání - pošlete kód 18 a potom číslo 0 nebo 1)
+19 - bright (ovládání jasu - pošlete kód 19 a potom číslo 0 nebo 1)
+20 - inverse (ovládání inverze - pošlete kód 20 a potom číslo 0 nebo 1)
+21 - over (ovládání over - pošlete kód 21 a potom číslo 0 nebo 1)
+22 - at (nastavení tiskové pozice - pošlete kód 22 a potom řádek a sloupec)
+
+-------------- SYSTEM VARIABLES ---------- 
+CHARS			$5C36-$5C37	Obsahuje adresu začátku tabulky znaků mínus 256($100). Normálně je v ní hodnota $3C00.
+LAST_K			$5c08 		kod posledneho stlaceneho klavesu
+ATTR_T 			$5c8f		docasne platne farby  	128*blikání + 64*jas + 8*papír + inkoust
+ATTR_P 			$5c8d		nastavene farby 		128*blikání + 64*jas + 8*papír + inkoust
+
+
+------------ ROM RUTINY --------------
+PRINT_LINE_NUM	$1a1b		vypise cislo 0-9999 z BC
+
+STACK_BC		$2d2b	
+PRINT_FP		$2de3		vypise cislo 0-65535 -> najprv prekoncertuje cislo z BC a ulozi ho na stack ako FP a potom vypise stack
+
+CL-ALL			$0daf 		clear screen
+BORDER			$229b		set border color from A	(kontroluje parametre, upravi hodnotu (x8) a zapise na adresu $5C48)
